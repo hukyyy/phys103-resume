@@ -1,0 +1,80 @@
+\renewcommand\thesection{IX}
+\section{Appareils de Mesures Électriques}
+
+\begin{multicols*}{2}
+    \subsection{Voltmètre}
+
+    Mesure la différence de potentiel (Volts) entre deux points du circuit. Il s'attache en parallèle: ici aux points $A$ et $B$.
+    
+    \begin{center}
+        \begin{circuitikz}
+            \draw (0,0) to [battery1, l_ =$\xi$] (0,2) to [R = $R_1$,-*] (2,2) node[above] {$A$} to [R = $R_2$,-*] (2,0) node[below] {$B$} to [R= $R_3$] (0,0);
+            \draw (2,2) to (4, 2) to [rmeter, t=V] (4,0) to (2,0);
+        \end{circuitikz}
+    \end{center}
+    
+    \subsection{Ampèremètre}
+    
+    Mesure l'intensité du courant (Ampères) en un point du circuit. Il s'attache en série: ici on mesure l'intensité du courant passant dans la résistance $R_3$.
+    
+    \begin{center}
+        \begin{circuitikz}
+            \draw (0,0) to [battery1, l_ =$\xi$] (0,2) to [R = $R_1$] (2,2) to [R = $R_2$] (2,0) to (0,0);
+            \draw (2,2) to [rmeter, t=A] (4, 2) to [R = $R_3$] (4,0) to (2,0);
+        \end{circuitikz}
+    \end{center}
+    
+    \subsection{Ohmmètre}
+    
+    Mesure la valeur d'une résistance. Il s'attache aux deux extrémités d'un circuit composé de résistances non alimenté. Ci dessous on mesure la résistance de $R_3$.
+    
+    \begin{center}
+        \begin{circuitikz}
+            \draw (0,0) to [battery1, l_ =$\xi$] (0,2) to [R = $R_1$] (2,2) to [R = $R_2$] (2,0) to (0,0);
+            \draw (3.5,2) to [R = $R_3$] (3.5, 0) to (2,0);
+            \draw (3.5,2) to  (5, 2) to [rmeter, t=$\Omega$] (5,0) to (3.5,0);
+        \end{circuitikz}
+    \end{center}
+    
+    \subsection{Multimètre}
+    
+    Appareil regroupant les différents appareils décrits ci-dessus. Il peut être réglé pour être utilisé soit comme voltmètre, soit comme ampèremètre, soit comme ohmmètre.
+    
+    \paragraph{Galvanomètre}
+    Un Galvanomètre fait dévier une aiguille sur un cadran de manière proportionnelle au courant qui le traverse. Un multimètre est composé de galvanomètres pour pouvoir indiquer les valeurs sur son cadran.
+    
+    \paragraph{Voltmètre}
+    
+    \begin{center}
+        \begin{circuitikz}
+            \draw (0, 0) to (1, 0) to [R = $R$] (3, 0) to [R = $r$] (4.5, 0) to [rmeter, t=$G$] (6, 0) to (7,0);
+        \end{circuitikz}
+    \end{center}
+    
+    \paragraph{Ampèremètre}
+    \begin{center}
+        \begin{circuitikz}
+            \draw (-0.5, 0) to (1, 0) to [R = $R$] (4,0) to (5.5,0);
+            \draw (1, 0) to (1, 1) to [R = $r$] (2.5, 1) to [rmeter, t=$G$] (4, 1) to (4, 0);
+        \end{circuitikz}
+    \end{center}
+    
+    \paragraph{Ohmmètre}
+    
+    \begin{center}
+        \begin{circuitikz}
+            \draw (0.5, 0) to (1, 0) to [battery1, l_=$V$] (3, 0) to [R = $r$] (4.5, 0) to [rmeter, t=$G$] (6, 0) to (7,0);
+        \end{circuitikz}
+    \end{center}
+    
+    \subsection{Oscilloscope}
+    
+    Permet l'étude des tensions alternatives en observant la forme de la variation dans le temps.
+    
+    \begin{center}
+        \begin{circuitikz}
+            \draw (0,0) to [oscope] (3,0);
+        \end{circuitikz}
+    \end{center}
+    
+\end{multicols*}
