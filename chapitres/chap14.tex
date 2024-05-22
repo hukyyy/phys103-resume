@@ -172,8 +172,8 @@
     
     \begin{center}
         \begin{tikzpicture}[domain=0.25:4.25, scale=1, smooth]
-            \draw[->] (0, -0.25) to (0, 3.5);
-            \draw[->] (-0.25, 0) to (4.5, 0);
+            \draw[->] (0, -0.25) to (0, 3.5) node[above] {$i_0$};
+            \draw[->] (-0.25, 0) to (4.5, 0) node[right] {$f$};
             \draw plot (\x, {3* exp(-(\x-2.25)^2) + 0.25});
             \draw[dotted] (0, {3* exp(0)^2 + 0.25}) node[left] {$i_0^{\text{max}}$} -- (2.25, {3* exp(0)^2 + 0.25});
             \draw[dotted] (0, {(3* exp(0)^2 + 0.25)/sqrt(2)}) node[left] {$\frac{i_0^{\text{max}}}{\sqrt{2}}$} -- (2.85, {(3* exp(0)^2 + 0.25)/sqrt(2)});
