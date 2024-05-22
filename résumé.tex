@@ -1,5 +1,6 @@
-\documentclass{article}
+\documentclass[titlepage]{article}
 
+\usepackage[french]{babel}
 \usepackage{tikz}
 \usepackage{circuitikz}
 \usepackage[no-math]{fontspec}
@@ -8,7 +9,21 @@
 \usepackage{amsmath}
 \setlength{\columnsep}{1cm}
 
+\author{Elliot Huet (571635)}
+\title{Condensé Physique BA1-INFO}
+
+\usepackage{tocloft}% http://ctan.org/pkg/tocloft
+\makeatletter
+\renewcommand{\numberline}[1]{%
+  \@cftbsnum #1\@cftasnum~\@cftasnumb%
+}
+\makeatother
+
 \begin{document}
+    \maketitle
+    \tableofcontents
+    
+    \pagebreak
     \include{chapitres/chap13.tex}
     \include{chapitres/chap14.tex}
 \end{document}
