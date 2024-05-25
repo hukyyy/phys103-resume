@@ -1,0 +1,114 @@
+\renewcommand\thesection{VIIIa}
+\section{Circuits à Résistances Ohmiques}
+
+\begin{multicols*}{2}
+    \subsection{Résistances en Série et en Parallèle}
+    
+    \subsubsection{En série}
+    
+    \begin{center}
+        \begin{circuitikz}
+            \draw (0, 0) to [battery1] (3, 0) to [R = $R_3$] (3,2) to [R = $R_2$] (0,2) to [R = $R_1$] (0,0);
+        \end{circuitikz}
+    \end{center}
+    \[ R_{\text{eq}} = \sum _{i = 1} ^n R_i \]
+    
+    \subsubsection{En parallèle}
+    
+    \begin{center}
+        \begin{circuitikz}
+            \draw (0,0) to [battery1, invert, l^=$V$] (0, 3);
+            \draw (0, 3) to (2, 3) to [R = $R_1$] (2,0) to (0,0); 
+            \draw (2, 3) to (3, 3) to [R = $R_2$] (3,0) to (2,0); 
+            \draw (3, 3) to (4, 3) to [R = $R_3$] (4,0) to (3,0); 
+        \end{circuitikz}
+    \end{center}
+    \[ \frac{1}{R_{\text{eq}}} = \sum _{i = 1} ^n \frac{1}{R_i} \]
+    
+    \subsection{Lois de Kirchhoff}
+    
+    \subsubsection{Loi des Nœuds}
+    La somme de tous les courants qui pénètrent dans un nœud est égale à la somme de tous les courants qui en sortent.
+    \begin{center}
+        \begin{circuitikz}
+            \draw (-2, 2) to [R = $R_1$, i=$I_1$, -*] (0, 0) node[below] {A} to [R = $R_3$, i=$I_3$] (2, -2);
+            \draw (-2, -2) to [R = $R_4$, i=$I_4$] (0, 0);
+            \draw (2, 2) to [R = $R_2$, i=$I_2$] (0, 0);
+        \end{circuitikz}
+    \end{center}    
+    \[ I_1 + I_2 + I_4 = I_3 \]
+    
+    \subsubsection{Loi des Mailles}
+    La somme des variations de potentiel le long d'un parcours fermé (une maille) est nulle.
+    \begin{center}
+        \begin{circuitikz}[scale=0.8]
+            \draw (7, 0) to[short, -*, i=$I_3$] (6, 0) node[below] {$b$} to [R = $R_3$, -*] (3, 0) node[below] {$c$} to [generic = $?$, -*, i=$I_1$] (0, 0) node[below] {$d$} to [R = $R_4$, -*] (0, 3) node[above] {$e$} to [battery1, invert, l_=$\xi$] (1.5, 3) to [R = $r$, -*] (3, 3) node[above] {$f$} to [R = $R_1$, i=$I_1$, -*] (6, 3) to [R = $R_2$, -*, i=$I_2$] (6, 0) ;
+            \draw (6, 3) to[short, i=$I_3$] (7,3);
+            \draw[dashed] (7,3) -- (8,3) (7,0) --(8,0);
+        \end{circuitikz}
+    \end{center}
+    \[V_{ab} + V_{bc}+V_{cd}+V_{de}+V_{ef}+V_{fa} = 0\]
+    
+    \subsection{Méthode de Résolution de Circuits par Lois de Kirchhoff}
+    
+    \begin{center}
+        \begin{circuitikz}[scale=0.8,smooth]
+            \draw (0, 0) node[left] {a} to [R = $R_2$, *-*] (2, 0) node[below] {f} to [R = $r_1$, -*, i^<=$I_2$] (4.5, 0) node[below] {$e$} to [battery1, l^=$\xi_1$, -*] (6, 0) node[right] {b};
+            \draw (0, 0) to (0, 2) to [R=$R_1$, i^<=$I_1$] (6, 2) to (6, 0);
+            \draw (0, 0) to (0, -2) to [battery1, invert, l^=$\xi_2$, i^>=$I_3$, -*] (3, -2) node[below] {$c$} to [R=$r_2$, -*] (6, -2) node[below] {$d$} to [R = $R_3$] (6, 0);
+            \draw[
+                decoration={markings, 
+                mark=at position 0.25 with {\arrow{<}}},
+                postaction={decorate}
+            ] (2, 1) node {\footnotesize (1)} circle (0.4);
+            \draw[
+                decoration={markings, 
+                mark=at position 0.25 with {\arrow{>}}},
+                postaction={decorate}
+            ] (3, -1) node {\footnotesize (2)} circle (0.4);
+            \draw[
+                decoration={markings, 
+                mark=at position 0.25 with {\arrow{>}}},
+                postaction={decorate}
+            ] (3, 0) ellipse (4.5 and 3.5);
+            \draw (2, 2.8) node {\footnotesize(3)};
+        \end{circuitikz}
+    \end{center}
+    
+    \paragraph{Étape 1} Établir un schéma clair et un tableau de toutes les valeurs numériques.
+    \paragraph{Étape 2} Identifier chaque branche et attribuer un symbole $I_i$, choisir le sens arbitrairement.
+    \paragraph{Étape 3} Identifier les nœuds et les désigner par une lettre. Indiquer les mailles par une boucle dans le sens qu'on va les parcourir, choisir ce sens arbitrairement.
+    \paragraph{Étape 4} Écrire la loi des nœuds pour chaque nœud. Ignorer la dernière équation.
+    \paragraph{Étape 5} Ajouter une lettre de référence entre chaque élément et écrire la loi des mailles. Ignorer la dernière équation.
+    \paragraph{Étape 6} Résoudre le système de n équations à n inconnues.
+    
+    \subsection{Théorème de Thévenin}
+    
+    Tout circuit à deux bornes A et B, composé de plusieurs sources de f.é.m, et à plusieurs résistances, peut être remplacé par une source de f.é.m unique $\xi_{\text{Th}}$ placée en série avec une résistance unique $R_{\text{Th}}$.
+    
+    \begin{center}
+        \begin{circuitikz}
+            \draw(-1, 0) to [battery1, l_=$E_1$] (-1,4);
+            \draw(1, 0) to [R = $R_1$] (1, 4);
+            \draw(2, 0) to [R = $R_3$] (2, 2) to [R = $R_2$] (2, 4);
+            \draw(3, 0) to [R = $R_5$] (3, 2) to [R = $R_4$] (3, 4);
+            \draw(6, 0) to [R = $R_7$] (6, 2) to [R = $R_6$] (6, 4);
+            \draw(-1, 0) to (6, 0) (-1, 4) to (6, 4);
+            \draw (2, 2) to [short,-*] (4, 2) node[below] {$A$};
+            \draw (6, 2) to [short,-*] (5, 2) node[below] {$B$};
+        \end{circuitikz}
+    \end{center}
+    
+    Peut être remplacé par:
+    
+    \begin{center}
+        \begin{circuitikz}
+            \draw (3, 0) node[below] {$B$} to[short, *-] (0, 0) to [battery1, l_=$\xi_{\text{Th}}$, invert] (0, 2) to[R = $R_{\text{Th}}$, -*] (3, 2) node[above] {$A$};
+        \end{circuitikz}
+    \end{center}
+    
+    \paragraph{Tension de Thévenin} $\xi_\text{Th}$ -- Calculer la différence de potentiel entre les bornes $A$ et $B$ lorsque le circuit est ouvert.
+    
+    \paragraph{Résistance de Thévenin} $R_\text{Th}$ -- Calculer la résistance équivalente entre $A$ et $B$ avec toutes les f.é.m court-circuitées.
+    
+\end{multicols*}
