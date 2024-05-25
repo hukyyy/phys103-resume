@@ -1,0 +1,158 @@
+\renewcommand\thesection{X}
+\section{Condensateurs}
+
+\begin{multicols*}{2}
+    Un condensateur est un élément de circuit qui permet d'emmagasiner des charges électriques et donc de l'énergie électrique. Il est constitué de deux plaques conductrices placées à coté l'une de l'autre.
+    
+    \begin{center}
+        \begin{circuitikz}
+            \draw (2, 2) to (3, 2) to (3, 0) to [battery1, invert, l^={$V$}] (0,0) to (0, 2) to (1, 2);
+            \draw (1, 1) rectangle (1.25, 3) node[anchor=south east] {$+Q$};
+            \draw (2, 1) rectangle (1.75, 3) node[anchor=south west] {$-Q$};
+            ;
+            \foreach \x in {1,...,5} {
+                \node at (1.125, 1 + \x * 0.3333) {\tiny $+$};
+                \node at (1.875, 1 + \x * 0.3333) {\tiny $-$};
+            };
+            
+            \draw[|<->|] (1.25, 0.8) -- (1.75, 0.8) node[above, pos=0.5] {$d$};
+        \end{circuitikz}
+    \end{center}
+    
+    Les électrons provenant de l'électrode négative de la batterie chargent l'armature négative. Par induction, les électrons dans l'armature positive sont repoussées vers l'électrode positive.
+    
+    \subsection{Capacité}
+    
+    La charge $Q$ d'un condensateur dépend de la tension $V$ à ses bornes.
+    \[ C = \frac{Q}{V} \qquad \text{constante} \]
+    
+    La capacité $C$ d'un condensateur est exprimée en Farad ($F$)
+    \[ 1F = \frac{1C}{V} \]
+    
+    \paragraph{Déterminer la capacité d'un condensateur à forme géométrique simple}
+    La distance entre les armatures étant très faible, on peut faire approximation que les plaques sont infinies. On a donc:
+    \[ E = \frac{\sigma}{\varepsilon_0 A} = \frac{Q}{\varepsilon_0 A} \]
+    
+    On a aussi $\Delta U = -qED$ et $\Delta V = \frac{\Delta U}{q}$, ce qui nous donne:
+    \[ V_{ba} = V_b - V_a = Ed \quad \Rightarrow V_{ba} = \frac{Qd}{\varepsilon_0 A} \]
+    \[ \Rightarrow C = \frac{Q}{V_{ba}} = \frac{\varepsilon_0 A}{d} \quad \text{dans le Vide} \]
+    
+    \subsection{Rôle des Diélectriques}
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0, 0) to (1, 0);
+            \draw (1.6, 0) to (2.6, 0);
+            \draw (1, -0.5) rectangle (1.2, 0.5);
+            \draw[pattern=north west lines] (1.2, -0.5) rectangle (1.4, 0.5);
+            \draw (1.4, -0.5) rectangle (1.6, 0.5);
+            \draw[<-] (1.3,0.5) -- (1.3, 0.75) -- (2, 0.75) node[right] {\footnotesize Diélectrique};
+        \end{tikzpicture}
+    \end{center}
+    \paragraph{Diélectrique} 
+    Matériau isolant séparant les armatures. Il permet de rapprocher les armatures plus près, ce qui augmente la capacité; et d'empêcher les charges de sauter, ce qui permet d'appliquer une tension plus haute sans décharger le condensateur.
+    
+    \paragraph{Constante diélectrique $\kappa$}
+    Dépend du matériau composant le diélectrique.
+    
+    \begin{center}
+        \begin{tabular}{lr}
+            \toprule
+            Matériau & $\kappa$ \\
+            \midrule
+            Vide & 1,0000 \\
+            Air & 1,0006 \\
+            Papier & 3 -- 7 \\
+            Porcelaine & 6 -- 8 \\
+            Eau & 80 \\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+        
+    
+    La capacité d'un condensateur avec diélectrique est donnée par:
+    \[ C = \kappa C_0 \qquad \Leftrightarrow C = \kappa \varepsilon_0 \frac{A}{d} \]
+    \[ \varepsilon = \varepsilon_0 \kappa \qquad \text{Permitivité du diélectrique} \]
+    
+    \subsection{Condensateurs en série et en parallèle}
+    
+    \subsubsection{En série}
+    
+    \begin{center}
+        \begin{circuitikz}
+            \draw (0, 0) to [battery1, l_={$V$}] (3, 0) to [C = $C_3$] (3,2) to [C = $C_2$] (0,2) to [C = $C_1$] (0,0);
+        \end{circuitikz}
+    \end{center}
+    \[ \frac{1}{C_{\text{eq}}} = \sum _{i = 1} ^n \frac{1}{C_i} \]
+    
+    \subsubsection{En parallèle}
+    
+    \begin{center}
+        \begin{circuitikz}
+            \draw (0,0) to [battery1, invert, l_={$V$}] (0, 3);
+            \draw (0, 3) to (2, 3) to [C = $C_1$] (2,0) to (0,0); 
+            \draw (2, 3) to (4, 3) to [C = $C_2$] (4,0) to (2,0); 
+            \draw (4, 3) to (6, 3) to [C = $C_3$] (6,0) to (4,0); 
+        \end{circuitikz}
+    \end{center}
+    \[ C_{\text{eq}} = \sum _{i = 1} ^n C_i \]
+    
+    \subsection{Énergie emmagasinée par un condensateur}
+    
+    \[U_E = \frac{1}{2} CV^2 \]
+    
+    \subsection{Circuits RC}
+    
+    Circuit constitué d'une résistance $R$ et d'un condensateur $C$.
+    
+    En introduisant un condensateur dans un circuit: le courant varie en fonction du temps pendant la charge et la décharge du condensateur.
+    
+    \subsubsection{Charge d'un condensateur}
+    
+    \begin{center}
+        \begin{circuitikz}
+            \draw (0,0) to [battery1, l_={$\xi$}] (0, 3) to [R = $R$] (2, 3) to [cspst, l^=$S_1$] (3.5, 3) to [C = $C$,invert, i^<= $I$,] (3.5, 0) to (0,0);
+            \draw (3.5, 3) to [ospst, l^=$S_2$] (5, 3) to [R = $R$] (5, 0) to (3.5, 0);
+        \end{circuitikz}
+    \end{center}
+    
+    Avec $S_2$ ouvert et le condensateur déchargé à $t=0s$. Lorsqu'on ferme $S_1$:
+    \[ Q = Q_f(1-e^{\frac{-t}{RC}}) \qquad \text{Avec } Q_f = C \xi \]
+    \[ I = \frac{dQ}{st} = \frac{\xi}{R} e^{\frac{-t}{RC}} \]
+    
+    \paragraph{Constante de temps RC} $\tau = RC$ en secondes, représente le temps requis pour que le condensateur atteigne 63\% de la charge finale $Q_f$. C'est une mesure de la vitesse avec laquelle le condensateur accumule les charges.
+    
+    \begin{center}
+        \begin{tikzpicture}[scale=0.9, domain=0:4.5]
+            \draw[->] (0,-0.5) -- (0, 3) node[above] {$Q$};
+            \draw[->] (-0.5,0) -- (5, 0) node[right] {$t$};
+            \draw[dotted] (0, {0.63 * 2}) node[left] {$63\% C\xi$} -- (1, {0.63 * 2}) -- (1, 0) node[below] {$\tau = RC $};
+            \draw[dotted] (0, 2) node[left] {$C\xi$} -- (4.5, 2);
+            \draw plot (\x, {2 * (1 - exp(-\x / 1))});
+        \end{tikzpicture}
+    \end{center}
+    
+    
+    \subsubsection{Décharge d'un condensateur}
+    
+    \begin{center}
+        \begin{circuitikz}
+            \draw (0,0) to [battery1, l_={$\xi$}] (0, 3) to [R = $R$] (2, 3) to [ospst, l^=$S_1$] (3.5, 3) to [C = $C$,invert, i^>= $I$,] (3.5, 0) to (0,0);
+            \draw (3.5, 3) to [cspst, l^=$S_2$] (5, 3) to [R = $R$] (5, 0) to (3.5, 0);
+        \end{circuitikz}
+    \end{center}
+    
+    Avec $S_1$ ouvert et le condensateur chargé à $t=0s$. Lorsqu'on ferme $S_2$:
+    \[ I = \frac{-dQ}{st} = \frac{Q_0}{RC} e^{\frac{-t}{RC}} \]
+    
+    \begin{center}
+        \begin{tikzpicture}[scale=0.9, domain=0:4.5]
+            \draw[->] (0,-0.5) -- (0, 3) node[above] {$Q$};
+            \draw[->] (-0.5,0) -- (5, 0) node[right] {$t$};
+            \draw[dotted] (0, {0.37 * 2}) node[left] {$37\% Q_0$} -- (1, {0.37 * 2}) -- (1, 0) node[below] {$\tau = RC$};
+            \draw plot (\x, {2 * exp(-\x / 1)});
+        \end{tikzpicture}
+    \end{center}
+    
+    Avec $Q_0 \approx C\xi$ si le condensateur est chargé presque au maximum.
+    
+\end{multicols*}
